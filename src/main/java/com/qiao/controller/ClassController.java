@@ -1,15 +1,19 @@
 package com.qiao.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.qiao.common.JsonUtil;
 import com.qiao.domain.Classes;
 import com.qiao.service.ClassService;
 
@@ -28,62 +32,67 @@ public class ClassController {
 	private ClassService classService;
 	
 	@ResponseBody
-	@RequestMapping("/get/{cid}")
-	public String getClassById(@PathVariable int cid){
+	@RequestMapping(value="/get/{cid}",  produces = MediaType.APPLICATION_JSON_VALUE)
+	public Classes getClassById(@PathVariable int cid){
 		LOGGER.error("get");
-		String msg = "";
+		Classes classes = null;
 		try {
-			Classes classes = classService.getClassById(cid);
-			msg = JsonUtil.obj2json(classes);
+			classes = classService.getClassById(cid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return msg;
+		return classes;
 	}
 	
 	@ResponseBody
-	@RequestMapping("/get2/{cid}")
-	public String getClassById2(@PathVariable int cid){
+	@RequestMapping(value="/get2/{cid}",  produces = MediaType.APPLICATION_JSON_VALUE)
+	public Classes getClassById2(@PathVariable int cid){
 		LOGGER.error("get2");
-		String msg = "";
+		Classes classes = null;
 		try {
-			Classes classes = classService.getClassById2(cid);
-			msg = JsonUtil.obj2json(classes);
+			classes = classService.getClassById2(cid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return msg;
+		return classes;
 	}
 	
 	@ResponseBody
-	@RequestMapping("/get3/{cid}")
-	public String getClassById3(@PathVariable int cid){
+	@RequestMapping(value="/get3/{cid}",  produces = MediaType.APPLICATION_JSON_VALUE)
+	public Classes getClassById3(@PathVariable int cid){
 		LOGGER.error("get3");
-		String msg = "";
+		Classes classes = null;
 		try {
-			Classes classes = classService.getClassById3(cid);
-			msg = JsonUtil.obj2json(classes);
+			classes = classService.getClassById3(cid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return msg;
+		return classes;
 	}
 	
 	@ResponseBody
-	@RequestMapping("/get4/{cid}")
-	public String getClassById4(@PathVariable int cid){
+	@RequestMapping(value="/get4/{cid}",  produces = MediaType.APPLICATION_JSON_VALUE)
+	public Classes getClassById4(@PathVariable int cid){
 		LOGGER.error("get4");
-		String msg = "";
+		Classes classes = null;
 		try {
-			Classes classes = classService.getClassById4(cid);
-			msg = JsonUtil.obj2json(classes);
+			classes = classService.getClassById4(cid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return classes;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/a")
+	public String getClassById(@RequestBody List<String> a){
+		LOGGER.error("a");
+		String msg = "dddd";
+		
 		return msg;
 	}
 }
