@@ -28,29 +28,7 @@
 	
 	<!-- 开启自动切面代理 -->
 	<aop:aspectj-autoproxy />
-	
-	<bean id="mappingJackson2HttpMessageConverter"
-		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-		<property name="supportedMediaTypes" value = "text/plain;charset=UTF-8" />
-		<property name="prettyPrint" value="true" />
-	</bean>
 
-	<bean id="stringHttpMessageConverter"
-		class="org.springframework.http.converter.StringHttpMessageConverter">
-		<property name="supportedMediaTypes" value = "text/plain;charset=UTF-8" />
-	</bean>
-	<!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
-	<bean
-		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<ref bean="stringHttpMessageConverter" />
-				<ref bean="mappingJackson2HttpMessageConverter" />	<!-- JSON转换器 -->
-			</list>
-		</property>
-	</bean>
-
-    
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
             <value>/WEB-INF/jsp/</value>

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 
 /**
- * <p>Title: A</p>
+ * <p>Title: TaiaerWSServiceImpl</p>
  * <p>Description: </p>
  * @author: zheng.qq
  * @date: 2016年3月17日
@@ -64,7 +64,6 @@ public class TaiaerWSServiceImpl implements TaiaerWSService {
 
 	public List<String[]> getNodeTextValue(String phone, String customerNo, String XPath) {
 		// TODO Auto-generated method stub
-		logger.debug("TaiaerWSServiceImpl:getNodeTextValue");
 		List<String[]> ll = new ArrayList<String[]>();
 	    StringBuffer nodeTextValue = new StringBuffer();
 	    if (XPath!=null && XPath.indexOf("@") >= 0) {
@@ -125,7 +124,6 @@ public class TaiaerWSServiceImpl implements TaiaerWSService {
 
 	public VOResult getNodeTextValueSearch(String phone, String customerNo, String starpage, String pagesize, String XPath) {
 		// TODO Auto-generated method stub
-		logger.debug("TaiaerWSServiceImpl:getNodeTextValueSearch");
 		if (XPath!=null && XPath.indexOf("@") >= 0) {
 	      return null;
 	    }
@@ -191,7 +189,6 @@ public class TaiaerWSServiceImpl implements TaiaerWSService {
 
 	public TaiaerBean getTaiaerBean(String phone, String customerNo, String XPath) {
 		// TODO Auto-generated method stub
-		logger.debug("TaiaerWSServiceImpl:getTaiaerBean");
 		StringBuffer nodeTextValue = new StringBuffer();
 		TaiaerBean tb = null;
 		if (XPath!=null && XPath.indexOf("@") >= 0) {

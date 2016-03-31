@@ -16,7 +16,17 @@
     
     <!-- 呼叫中心-订单接口 -->
 	<dubbo:reference id="callCenterMemberService"
-		interface="com.yougou.ordercenter.api.order.ICallCenterMemberService" check="false"
+		interface="com.yougou.ordercenter.api.order.ICallCenterMemberService" check="false" timeout="300000" 
+		version="1.4" protocol="dubbo" />
+		
+	<!-- 商品API -->
+	<dubbo:reference id="commodityBaseApiService"
+		interface="com.yougou.pc.api.ICommodityBaseApiService" check="false" timeout="300000" 
+		version="1.2" protocol="dubbo" />
+		
+	<!-- 订单 -->
+	<dubbo:reference id="orderApi"
+		interface="com.yougou.ordercenter.api.order.IOrderApi" check="false" timeout="300000" 
 		version="1.4" protocol="dubbo" />
 
 </beans>

@@ -1,8 +1,12 @@
 package com.qiao.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qiao.domain.Classes;
 import com.qiao.service.ClassService;
+import com.qiao.vo.UserFormVo;
 
 /**
  * <p>Title: ClassController</p>
@@ -28,6 +33,13 @@ import com.qiao.service.ClassService;
 @Scope("prototype")
 public class ClassController {
 	private final Logger LOGGER = Logger.getLogger(ClassController.class);
+	
+	@Resource
+	private  HttpServletRequest request;
+	@Resource
+	protected HttpServletResponse response;  
+	@Resource
+    protected HttpSession session;  
 	@Resource
 	private ClassService classService;
 	
@@ -88,11 +100,22 @@ public class ClassController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/a")
-	public String getClassById(@RequestBody List<String> a){
+	@RequestMapping(value="/a",  
+		method = RequestMethod.POST,
+		consumes = {MediaType.APPLICATION_JSON_VALUE},
+		produces = {MediaType.APPLICATION_JSON_VALUE})
+	public String[] getClassById(@RequestBody String[] a){
 		LOGGER.error("a");
-		String msg = "dddd";
-		
-		return msg;
+		return a;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/b",  
+		method = RequestMethod.POST,
+		produces = {MediaType.APPLICATION_JSON_VALUE})
+	public void b (UserFormVo userFormVo){
+		String name = request.getParameter("name");
+		LOGGER.error(name);
+
 	}
 }

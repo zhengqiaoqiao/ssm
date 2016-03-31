@@ -2,6 +2,7 @@ package com.hollycrm.ecallcenter.hollycc.channel.call.util;
 
 import com.hollycrm.ecallcenter.hollycc.channel.base.util.TaskExtendParamUtil;
 import com.yougou.ordercenter.api.order.ICallCenterMemberService;
+import com.yougou.pc.api.ICommodityBaseApiService;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,8 +31,10 @@ public class TaiaerWS {
 	@Resource
 	private ICallCenterMemberService callCenterMemberService;
 	
+	@Resource
+	private ICommodityBaseApiService commodityBaseApiService;
+	
 	public List getNodeTextValue(String callNo, String customerNo, String pageSize, String begainPage, String XPath){ 
-		logger.debug("TaiaerWS:getNodeTextValue");
 		List ll = new ArrayList();
 	    StringBuffer nodeTextValue = new StringBuffer();
 	    if (XPath!=null && XPath.indexOf("@") >= 0) {
