@@ -39,11 +39,15 @@
 	</appender>
 	
 	<logger name="com.mchange">
-		<level value="info" />
+		<level value="warn" />
 	</logger>
 	
-	<logger name="org.apache.zookeeper">
-		<level value="info" />
+	<logger name="com.alibaba">
+		<level value="warn" />
+	</logger>
+	
+	<logger name="org">
+		<level value="warn" />
 	</logger>
 
 	<!-- Root Logger -->
