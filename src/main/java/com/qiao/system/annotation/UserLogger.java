@@ -17,4 +17,6 @@ import java.lang.annotation.Target;
 public @interface UserLogger {
 	// 方法注释
 	String methodNote();
+	// 是否打印执行结果
+	boolean isPrintResult();
 }

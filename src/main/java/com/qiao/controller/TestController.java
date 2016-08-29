@@ -34,6 +34,8 @@ import com.yougou.wfx.commodity.dto.output.CommoditySimplifyStyleOutputDto;
 import com.yougou.wfx.commodity.dto.output.CommodityStyleOutputDto;
 import com.yougou.wfx.commodity.dto.output.SellerCommodityCatRelaOutpuDto;
 import com.yougou.wfx.dto.base.WFXResult;
+import com.yougou.wfx.finance.api.front.ICommissionPercentFrontApi;
+import com.yougou.wfx.finance.dto.output.CommissionPercentOutputDto;
 import com.yougou.wfx.member.api.front.IMemberAccountFrontApi;
 import com.yougou.wfx.member.dto.input.MemberForWXInputDto;
 import com.yougou.wfx.member.dto.output.MemberAccountOutputDto;
@@ -90,6 +92,8 @@ public class TestController {
 	private IOrderForMerchantApi orderForMerchantApi;
 	@Resource
     private IMemberAccountFrontApi memberAccountFrontApi;
+	@Resource
+    private ICommissionPercentFrontApi commissionPercentFrontApi;
 	
 	@ResponseBody
 	@RequestMapping(value="/getProductByNo",  produces = MediaType.APPLICATION_JSON_VALUE)
@@ -404,10 +408,9 @@ public class TestController {
 	
 	@ResponseBody
 	@RequestMapping(value="/1111",  produces = MediaType.APPLICATION_JSON_VALUE)
-	public MemberAccountOutputDto ff(String id){
-		MemberAccountOutputDto member = memberAccountFrontApi.getMemberAccountById(id);
-		
-		return member;
+	public CommissionPercentOutputDto ff(String brandNo, String commodityId){
+		CommissionPercentOutputDto dto = commissionPercentFrontApi.getCommissionByCondition(brandNo, null, commodityId);
+		return dto;
 	}
 
 }

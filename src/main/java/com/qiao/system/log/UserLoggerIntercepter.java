@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 
 import com.qiao.system.annotation.UserLogger;
 import com.qiao.system.bean.UserLoggerBean;
+import com.qiao.util.CommonUtil;
 import com.qiao.util.DateUtil;
 import com.qiao.util.JsonUtil;
 
@@ -47,19 +48,22 @@ public class UserLoggerIntercepter {
     
     @Around("pointcut()")
     public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
+    	Date start = null;
+    	Date end = null;
+    	Method method = this.getMethod(joinPoint);
+    	UserLogger annotation = method.getAnnotation(UserLogger.class);
     	UserLoggerBean loggerBean = new UserLoggerBean();
     	if (logger.isInfoEnabled()) {
     		try{
+    			start = new Date();
         		//请求的IP    
-                String ip = request.getRemoteAddr();   
+                String ip = CommonUtil.getRemoteHost(request);
                 String methodName = joinPoint.getSignature().getName();
         		String className = joinPoint.getTarget().getClass().getName();
-        		Method method = this.getMethod(joinPoint);
-        		UserLogger annotation = method.getAnnotation(UserLogger.class);
         		Object[] args = joinPoint.getArgs();
         		loggerBean.setMethodName(className+"."+methodName);
                 loggerBean.setRequestIp(ip);
-                loggerBean.setRequestStartTime(DateUtil.format(new Date()));
+                loggerBean.setRequestStartTime(DateUtil.format(start));
                 loggerBean.setMethodDesc(annotation.methodNote());
                 Map<String, Object> params = new HashMap<String, Object>();
                 if (args != null && args.length > 0) {
@@ -72,9 +76,7 @@ public class UserLoggerIntercepter {
         		logger.error("设置方法请求内容日志功能发生异常：", e);
         	}
     	}
-    	
-    		
-    	
+
     	Object result = null;
     	Exception error = null;
     	try{
@@ -85,8 +87,12 @@ public class UserLoggerIntercepter {
     	}
     	if (logger.isInfoEnabled()) {
     		try{
-        		loggerBean.setResult(result);
-                loggerBean.setRequestEndTime(DateUtil.format(new Date()));
+    			end = new Date();
+    			loggerBean.setExecutionTime(end.getTime()-start.getTime());
+    			loggerBean.setRequestEndTime(DateUtil.format(end));
+    			if(annotation.isPrintResult()){
+    				loggerBean.setResult(result);
+    			}
                 logger.info("系统日志：{}", JsonUtil.serialize(loggerBean));
         	}catch(Exception e){
         		logger.error("设置方法请求的结果日志功能发生异常：", e);
