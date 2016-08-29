@@ -133,12 +133,6 @@
 		    <artifactId>commons-codec</artifactId>
 		    <version>1.10</version>
 		</dependency>
-		<!-- 微信支付 -->
-		<dependency>
-		    <groupId>com.github.developframework</groupId>
-		    <artifactId>wechat-pay-core</artifactId>
-		    <version>0.0.2</version>
-		</dependency>
 
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
